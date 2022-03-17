@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnNxtTurn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Turn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.603" />
+
+    <TextView
+        android:id="@+id/txtHeroKitty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
+        android:text="Kitty"
+        app:layout_constraintEnd_toStartOf="@+id/btnNxtTurn"
+        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtHeroDmg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Damage"
+        app:layout_constraintEnd_toEndOf="@+id/txtHeroKitty"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtHeroKitty"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeroKitty" />
+
+    <TextView
+        android:id="@+id/txtHeroHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="HP"
+        app:layout_constraintStart_toStartOf="@+id/txtHeroKitty"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeroDmg" />
+
+    <TextView
+        android:id="@+id/txtEnemy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="248dp"
+        android:text="Witch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.579"
+        app:layout_constraintStart_toEndOf="@+id/btnNxtTurn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtEnemyDmg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Enemy Damage"
+        app:layout_constraintEnd_toEndOf="@+id/txtEnemy"
+        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintStart_toStartOf="@+id/txtEnemy"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnemy" />
+
+    <TextView
+        android:id="@+id/txtEnemyFP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Enemy FP"
+        app:layout_constraintEnd_toEndOf="@+id/txtEnemy"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnemyHP" />
+
+    <TextView
+        android:id="@+id/txtEnemyHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="HP"
+        app:layout_constraintEnd_toEndOf="@+id/txtEnemy"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnemyDmg" />
+
+    <TextView
+        android:id="@+id/txtTurnCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="TURNS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtHeroFP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="FP"
+        app:layout_constraintStart_toStartOf="@+id/txtHeroKitty"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeroHP" />
+
+    <ImageButton
+        android:id="@+id/btnRaiseDefense"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="17dp"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:text="RaiseDefense"
+        app:layout_constraintEnd_toStartOf="@+id/btnRaiseATK"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txtHeroDmg"
+        app:layout_constraintTop_toBottomOf="@+id/btnNxtTurn"
+        app:srcCompat="@drawable/defend" />
+
+    <ImageButton
+        android:id="@+id/btnRaiseATK"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:text="RaiseDamage"
+        app:layout_constraintEnd_toStartOf="@+id/btnHeal"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnRaiseDefense"
+        app:layout_constraintTop_toTopOf="@+id/btnRaiseDefense"
+        app:srcCompat="@drawable/increase_atk" />
+
+    <ImageButton
+        android:id="@+id/btnHeal"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:text="Heal"
+        app:layout_constraintEnd_toStartOf="@+id/txtEnemyDmg"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnRaiseATK"
+        app:layout_constraintTop_toTopOf="@+id/btnRaiseATK"
+        app:srcCompat="@drawable/heal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
