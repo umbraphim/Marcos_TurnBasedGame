@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int heroMaxDMG = 1700;
 
     //enemy
-    String enemyName = "Kitty Knight";
-    int enemyHP = 4000;
+    String enemyName = "Witch";
+    int enemyHP = 3000;
     int enemyFP = 500;
     int enemyDF = 450;
     int enemyMinDMG = 300;
@@ -37,7 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //turn count
     int turnNumber = 1;
+
     int buttonCount = 0;
+    int statuscounter = 0;
+    boolean status = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtHeroFP = findViewById(R.id.txtHeroFP);
         txtEnemyFP = findViewById(R.id.txtEnemyFP);
         btnNxtTurn = findViewById(R.id.btnNxtTurn);
+        txtStatus = findViewById(R.id.txtStatus);
 
         txtTurnCount = findViewById(R.id.txtTurnCount);
 
@@ -104,52 +110,136 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Heal.setEnabled(true);
         }
 
-        switch(v.getId()){
+        switch(v.getId()) {
             case R.id.btnHeal:
-                heroHP = heroHP + 200;
-                heroFP = heroFP + 200;
-                turnNumber++;
-                txtHeroHP.setText(String.valueOf(heroHP));
-                txtHeroFP.setText(String.valueOf(heroFP));
-                btnNxtTurn.setText("Next Turn ("+String.valueOf(turnNumber)+")");
+               if(heroHP < 2500){
+                   heroHP = heroHP + 200;
+                   heroFP = heroFP + 200;
+                   turnNumber++;
+                   txtHeroHP.setText(String.valueOf(heroHP));
+                   txtHeroFP.setText(String.valueOf(heroFP));
+                   btnNxtTurn.setText("Next Turn (" + String.valueOf(turnNumber) + ")");
 
-                txtStatus.setText("Kitty Knight restored HP and FP!");
+                   txtStatus.setText("Kitty Knight restored HP and FP!");
+               }
+                status = true;
+                statuscounter = 1;
+                if(heroFP < 1500){
+                    heroHP = heroHP + 200;
+                    heroFP = heroFP + 200;
+                    turnNumber++;
+                    txtHeroHP.setText(String.valueOf(heroHP));
+                    txtHeroFP.setText(String.valueOf(heroFP));
+                    btnNxtTurn.setText("Next Turn (" + String.valueOf(turnNumber) + ")");
+
+                    txtStatus.setText("Kitty Knight restored HP and FP!");
+                }
+                status = true;
+                statuscounter = 1;
                 break;
-        }
 
-        switch (v.getId()) {
+
             case R.id.btnRaiseDefense:
+                if(heroDF < 100){
                 heroDF = heroDF + 100;
                 enemyDF = enemyDF - 25;
                 turnNumber++;
                 txtHeroDF.setText(String.valueOf(heroDF));
                 txtEnemyDF.setText(String.valueOf(enemyDF));
-                btnNxtTurn.setText("Next Turn "+ String.valueOf(turnNumber)+")");
+                btnNxtTurn.setText("Next Turn " + String.valueOf(turnNumber) + ")");
 
                 txtStatus.setText("Kitty Knight raised its DF and lowered the enemy DF!");
+            }
+                if(enemyDF < 450){
+                    heroDF = heroDF + 100;
+                    enemyDF = enemyDF - 25;
+                    turnNumber++;
+                    txtHeroDF.setText(String.valueOf(heroDF));
+                    txtEnemyDF.setText(String.valueOf(enemyDF));
+                    btnNxtTurn.setText("Next Turn " + String.valueOf(turnNumber) + ")");
+
+                    txtStatus.setText("Kitty Knight raised its DF and lowered the enemy DF!");
+                }
+                status = true;
+                statuscounter = 4;
                 break;
-        }
-        switch (v.getId()){
+
+
             case R.id.btnRaiseATK:
-                heroDmg = heroDmg + 150;
-                enemyHP = enemyHP - 200;
-                turnNumber++;
-                txtEnemyHP.setText(String.valueOf(enemyHP));
-                txtHeroDmg.setText(String.valueOf(heroDmg));
-                btnNxtTurn.setText("Next Turn ("+ String.valueOf(turnNumber)+")");
+                if(enemyHP <= 3000) {
+                    heroDmg = heroDmg + 150;
+                    enemyHP = enemyHP - 200;
+                    turnNumber++;
+                    txtEnemyHP.setText(String.valueOf(enemyHP));
+                    txtHeroDmg.setText(String.valueOf(heroDmg));
+                    btnNxtTurn.setText("Next Turn (" + String.valueOf(turnNumber) + ")");
 
-                txtStatus.setText("Kitty Knight has raised its ATK and attacked! It dealt "+String.valueOf(200)+" to their enemy. ");
+                    txtStatus.setText("Kitty Knight has raised its ATK and attacked! It dealt " + String.valueOf(200) + " to their enemy. ");
+                }
+                status = true;
+                statuscounter = 4;
+                turnNumber = 1;
 
-                if(enemyHP < 0 ){
+                if (enemyHP < 0) {
                     txtStatus.setText("Kitty Knight has dealt the finishing blow!");
                     heroHP = 2500;
-                    enemyHP = 4000;
+                    enemyHP = 3000;
                     turnNumber = 1;
-                    btnNxtTurn.setText("RESET");
-
-                    break;
+                    btnNxtTurn.setText("RESTART");
                 }
+                buttonCount = 12;
+                break;
+
+
+            case R.id.btnNxtTurn:
+                if(turnNumber % 2 == 1) { //hero turn
+                    enemyHP = enemyHP - heroDmg;
+                    turnNumber++;
+                    txtEnemyHP.setText(String.valueOf(enemyHP));
+                    btnNxtTurn.setText("Next Turn(" + String.valueOf(turnNumber) + ")");
+
+                    txtStatus.setText("Kitty Knight has dealt " + String.valueOf(heroDmg) + " damage to the enemy.");
+                }
+                   if(enemyHP < 0){
+                       txtStatus.setText("Kitty Knight has dealt "+String.valueOf(heroDmg)+" to enemy and did the final blow. Kitty is victorious!");
+                       heroHP = 2500;
+                       enemyHP = 3000;
+                       turnNumber = 1;
+                       buttonCount = 0;
+                       btnNxtTurn.setText("RESET");
+                }
+                   else if(turnNumber %2 !=1 ) {
+                       if (status == true) {
+                           heroHP = heroHP - enemyDmg;
+                           turnNumber++;
+                           txtHeroHP.setText(String.valueOf(heroHP));
+
+                           txtStatus.setText("The enemy has dealt " + String.valueOf(enemyDmg) + " to Kitty Knight!");
+                           if (statuscounter == 0) {
+                               status = false;
+                           }
+                       }
+                       else{
+                           enemyHP = enemyHP - heroDmg;
+                           turnNumber++;
+                           txtHeroHP.setText(String.valueOf(enemyHP));
+                           btnNxtTurn.setText("Next Turn ("+String.valueOf(turnNumber)+")");
+
+                           txtStatus.setText("Kitty Knight has dealt "+String.valueOf(enemyDmg)+" to enemy!");
+
+                           if(heroHP<0){
+                               txtStatus.setText("The enemy has defeated Kitty Knight! You Lose!");
+                               heroHP = 2500;
+                               enemyHP = 3000;
+                               turnNumber = 1;
+                               buttonCount = 0;
+                               btnNxtTurn.setText("RESET");
+                           }
+                       }
+                   }
+                    break;
+                   }
         }
 
     }
-}
+
