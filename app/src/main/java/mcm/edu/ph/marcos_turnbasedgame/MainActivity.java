@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()) {
             case R.id.btnHeal:
-               if(heroHP < 2500){
+               if(heroHP <= 2500){
                    heroHP = heroHP + 200;
                    heroFP = heroFP + 200;
                    turnNumber++;
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                }
                 status = true;
                 statuscounter = 1;
-                if(heroFP < 1500){
+                if(heroFP <= 1500){
                     heroHP = heroHP + 200;
                     heroFP = heroFP + 200;
                     turnNumber++;
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.btnRaiseDefense:
-                if(heroDF < 100){
+                if(heroDF == 100){
                 heroDF = heroDF + 100;
                 enemyDF = enemyDF - 25;
                 turnNumber++;
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 txtStatus.setText("Kitty Knight raised its DF and lowered the enemy DF!");
             }
-                if(enemyDF < 450){
+                if(enemyDF >= 450){
                     heroDF = heroDF + 100;
                     enemyDF = enemyDF - 25;
                     turnNumber++;
