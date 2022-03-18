@@ -209,15 +209,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                        btnNxtTurn.setText("RESET");
                 }
                    else if(turnNumber %2 !=1 ) {
-                       if (status == true) {
                            heroHP = heroHP - enemyDmg;
                            turnNumber++;
                            txtHeroHP.setText(String.valueOf(heroHP));
 
                            txtStatus.setText("The enemy has dealt " + String.valueOf(enemyDmg) + " to Kitty Knight!");
-                           if (statuscounter == 0) {
-                               status = false;
-                           }
                        }
                        else{
                            enemyHP = enemyHP - heroDmg;
@@ -236,10 +232,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                btnNxtTurn.setText("RESET");
                            }
                        }
+                       break;
                    }
-                    break;
+
                    }
         }
 
-    }
+
 
